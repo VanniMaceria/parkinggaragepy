@@ -16,5 +16,6 @@ class TestParkingGarage(TestCase):
        outcome = garage.check_occupancy(garage.INFRARED_PIN2)
        self.assertTrue(outcome)
 
-
-
+    def test_check_occupancy_raises_error(self):
+        garage = ParkingGarage()
+        self.assertRaises(ParkingGarageError, garage.check_occupancy, garage.SERVO_PIN)
