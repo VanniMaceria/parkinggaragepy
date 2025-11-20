@@ -58,3 +58,11 @@ class TestParkingGarage(TestCase):
         garage.open_garage_door()
         motor.assert_called_once_with(12)
         self.assertTrue(garage.door_open)
+
+    @patch.object(ParkingGarage, "change_servo_angle")
+    def test_open_garage_door(self, motor: Mock):
+        garage = ParkingGarage()
+        garage.door_open = True #per sicurezza si imposta ad aperta così si controlla se veramente si chiude
+        garage.close_garage_door()
+        motor.assert_called_once_with(2)
+        self.assertFalse(garage.door_open)
