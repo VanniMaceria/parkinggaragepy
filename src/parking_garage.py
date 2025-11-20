@@ -37,7 +37,6 @@ class ParkingGarage:
         self.servo.ChangeDutyCycle(0)  # Sets duty cycle equal to 0% (corresponding to a low signal)
         self.door_open = False
         self.red_light_on = False
-        GPIO.output(self.LED_PIN, False)
 
     def check_occupancy(self, pin: int) -> bool:
         # To be implemented
