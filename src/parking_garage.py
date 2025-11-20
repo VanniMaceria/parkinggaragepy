@@ -59,6 +59,13 @@ class ParkingGarage:
         if entry_time.minute < exit_time.minute:
             hours += 1
 
+        # controllo sul weekend
+        day = entry_time.weekday()
+        fee = hours * 2.5
+        if day in [5, 6]:
+            fee *= 1.25
+            return fee
+
         return hours * 2.50
 
     def open_garage_door(self) -> None:
