@@ -10,7 +10,11 @@ from src.parking_garage import ParkingGarageError
 class TestParkingGarage(TestCase):
 
     @patch.object(GPIO, "input")
-    def test_something(self, mock_object: Mock):
-        # This is an example of test where I want to mock the GPIO.input() function
-        pass
+    def test_check_occupancy(self, distance_sensor: Mock):
+       distance_sensor.return_value = True  #si mocka il valore del sensore
+       garage = ParkingGarage()
+       outcome = garage.check_occupancy(garage.INFRARED_PIN2)
+       self.assertTrue(outcome)
+
+
 
