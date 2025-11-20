@@ -18,4 +18,12 @@ class TestParkingGarage(TestCase):
 
     def test_check_occupancy_raises_error(self):
         garage = ParkingGarage()
+        #parametri assertRaises(eccezioneAspettata, metodoDaTestare, inputMetodo)
         self.assertRaises(ParkingGarageError, garage.check_occupancy, garage.SERVO_PIN)
+
+    @patch.object(GPIO, "input")
+    def test_check_get_number_occupied_spots(self, distance_sensor: Mock):
+        distance_sensor.side_effect = [True, False, True]
+        garage = ParkingGarage()
+        occupied_spots = garage.get_number_occupied_spots()
+        self.assertEqual(2, occupied_spots)
