@@ -69,8 +69,8 @@ class ParkingGarage:
         return hours * 2.50
 
     def open_garage_door(self) -> None:
-        # To be implemented
-        pass
+        self.change_servo_angle(12)
+        self.door_open = True
 
     def close_garage_door(self) -> None:
         # To be implemented

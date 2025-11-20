@@ -56,5 +56,5 @@ class TestParkingGarage(TestCase):
     def test_open_garage_door(self, motor: Mock):
         garage = ParkingGarage()
         garage.open_garage_door()
-        self.assertTrue(garage.door_open)
         motor.assert_called_once_with(12)
+        self.assertTrue(garage.door_open)
