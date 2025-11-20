@@ -55,6 +55,10 @@ class ParkingGarage:
     def calculate_parking_fee(self, entry_time: datetime) -> float:
         exit_time = self.rtc.read_datetime()
         hours = exit_time.hour - entry_time.hour
+
+        if entry_time.minute < exit_time.minute:
+            hours += 1
+
         return hours * 2.50
 
     def open_garage_door(self) -> None:
