@@ -80,3 +80,22 @@ class TestParkingGarage(TestCase):
         garage.turn_off_red_light()
         self.assertFalse(garage.red_light_on)
         light.assert_called_once_with(garage.LED_PIN, False)
+
+    @patch.object(GPIO, "input")
+    @patch.object(GPIO, "output")
+    def test_manage_light_parking_full(self, light: Mock, mock_input: Mock):
+        garage = ParkingGarage()
+        mock_input.side_effect = [True, True, True]
+        garage.manage_red_light()
+        light.assert_called_once_with(garage.LED_PIN, True)
+        self.assertTrue(garage.red_light_on)
+
+    @patch.object(GPIO, "input")
+    @patch.object(GPIO, "output")
+    def test_manage_light_parking_full(self, light: Mock, mock_input: Mock):
+        garage = ParkingGarage()
+        mock_input.side_effect = [True, False, True]
+        garage.manage_red_light()
+        light.assert_called_once_with(garage.LED_PIN, False)
+        self.assertFalse(garage.red_light_on)
+
